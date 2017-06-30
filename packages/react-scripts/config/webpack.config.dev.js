@@ -139,6 +139,7 @@ module.exports = {
               // @remove-on-eject-begin
               baseConfig: {
                 extends: [require.resolve('eslint-config-react-app')],
+                globals: { React: true, Component: true },
               },
               ignore: false,
               useEslintrc: false,
@@ -194,6 +195,7 @@ module.exports = {
           // @remove-on-eject-begin
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
+          plugins: ['transform-decorators-legacy'],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -214,6 +216,8 @@ module.exports = {
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 1,
+              modules: true,
+              localIdentName: '[name]--[local]--[hash:base64:5]'
             },
           },
           {
@@ -223,16 +227,19 @@ module.exports = {
               // https://github.com/facebookincubator/create-react-app/issues/2677
               ident: 'postcss',
               plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
+                require('postcss-import')({
+                  path: paths.appSrc,
+                  glob: true
                 }),
+                require('postcss-cssnext')({
+                  browsers: 'last 2 versions',
+                  sourcemap: true,
+                  features: {
+                    autoprefixer: {
+                      remove: false // faster if not processing legacy css
+                    }
+                  }
+                })
               ],
             },
           },
@@ -275,6 +282,10 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.ProvidePlugin({
+      React: 'react',
+      Component: ['react', 'Component']
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

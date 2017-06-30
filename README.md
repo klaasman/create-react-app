@@ -1,4 +1,10 @@
-# Create React App [![Build Status](https://travis-ci.org/facebookincubator/create-react-app.svg?branch=master)](https://travis-ci.org/facebookincubator/create-react-app)
+#  🌱 Opiniated Create React App
+
+See [packages/react-scripts](packages/react-scripts)
+
+---
+
+# Create React App [![Build Status](https://travis-ci.org/klaasman/create-react-app.svg?branch=master)](https://travis-ci.org/klaasman/create-react-app)
 
 Create React apps with no build configuration.
 

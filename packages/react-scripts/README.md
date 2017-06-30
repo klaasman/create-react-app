@@ -1,3 +1,21 @@
+#  🌱 Opiniated Create React App
+
+```
+> create-react-app app-name --scripts-version klaasman-react-scripts
+```
+
+### What's different?
+
+- support for decorators
+- injects both `React` as `Component` in all modules (no more verbose imports)
+- resolve by default all modules from the `src`-directory (absolute imports)
+- css modules
+- css next
+- css imports
+- deploy to `/target`-directory (instead of `/build` - convention at Kaliber)
+
+---
+
 # react-scripts
 
 This package includes scripts and configuration used by [Create React App](https://github.com/facebookincubator/create-react-app).<br>

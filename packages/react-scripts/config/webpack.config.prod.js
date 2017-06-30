@@ -141,6 +141,7 @@ module.exports = {
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
                 extends: [require.resolve('eslint-config-react-app')],
+                globals: { React: true, Component: true },
               },
               ignore: false,
               useEslintrc: false,
@@ -194,6 +195,7 @@ module.exports = {
           // @remove-on-eject-begin
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
+          plugins: ['transform-decorators-legacy'],
           // @remove-on-eject-end
           compact: true,
         },
@@ -223,6 +225,8 @@ module.exports = {
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
+                    modules: true,
+                    localIdentName: '[name]--[local]--[hash:base64:5]'
                   },
                 },
                 {
@@ -232,16 +236,19 @@ module.exports = {
                     // https://github.com/facebookincubator/create-react-app/issues/2677
                     ident: 'postcss',
                     plugins: () => [
-                      require('postcss-flexbugs-fixes'),
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
+                      require('postcss-import')({
+                        path: paths.appSrc,
+                        glob: true
                       }),
+                      require('postcss-cssnext')({
+                        browsers: 'last 2 versions',
+                        sourcemap: true,
+                        features: {
+                          autoprefixer: {
+                            remove: false // faster if not processing legacy css
+                          }
+                        }
+                      })
                     ],
                   },
                 },
