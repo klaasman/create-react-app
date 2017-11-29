@@ -1,14 +1,14 @@
 {
   "name": "klaasman-react-scripts",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Opiniated `Configuration and scripts for Create React App.`",
-  "repository": "facebookincubator/create-react-app",
+  "repository": "klaasman/create-react-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/klaasman/create-react-app/issues"
   },
   "files": [
     "bin",
